@@ -1,7 +1,7 @@
 /* Global styles and design tokens */
 :root {
-  --accent: #4f46e5;
-  --accent-soft: rgba(79, 70, 229, 0.18);
+  --accent: #2563eb;
+  --accent-soft: rgba(37, 99, 235, 0.16);
   --bg: #f3f4f6;
   --surface: #ffffff;
   --surface-2: #f8fafc;
@@ -31,4 +31,49 @@ body {
 
 a {
   color: var(--accent);
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* ----- Blue buttons (override Material primary) ----- */
+$blue: #2563eb;
+
+.mat-mdc-unelevated-button.mat-primary,
+.mat-mdc-raised-button.mat-primary {
+  --mdc-filled-button-container-color: #{$blue};
+  --mdc-filled-button-label-text-color: #fff;
+}
+
+.mat-mdc-button.mat-primary {
+  --mdc-text-button-label-text-color: #{$blue};
+  color: $blue;
+}
+
+.mat-mdc-outlined-button.mat-primary {
+  --mdc-outlined-button-label-text-color: #{$blue};
+  --mdc-outlined-button-outline-color: #{$blue};
+  color: $blue;
+}
+
+.mat-toolbar.mat-primary {
+  background: $blue;
+  color: #fff;
+}
+
+/* ----- Chip action label ----- */
+.mat-mdc-chip-action-label {
+  text-align: left;
+  z-index: 1;
+  padding: 5px;
+}
+
+/* ----- Light grey borders on Material surfaces ----- */
+.mat-mdc-card.mat-mdc-card-outlined {
+  --mdc-outlined-card-outline-color: var(--border);
+}
+
+.mat-mdc-form-field.mat-mdc-form-field-appearance-outline {
+  --mdc-outlined-text-field-outline-color: var(--border);
+  --mdc-outlined-text-field-hover-outline-color: #d1d5db;
 }

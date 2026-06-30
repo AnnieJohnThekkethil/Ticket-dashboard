@@ -1,15 +1,16 @@
-<div class="ai-panel">
+<mat-card class="ai-panel" appearance="outlined">
   <div class="ai-panel__header">
     <div class="ai-title">
-      <span class="ai-avatar" aria-hidden="true">&#129302;</span>
+      <mat-icon class="ai-avatar" aria-hidden="true">smart_toy</mat-icon>
       <div>
         <strong>AI Assistant</strong>
         <small>Ask about ticket #{{ ticket.id }}</small>
       </div>
     </div>
     <button
+      mat-button
       type="button"
-      class="link-btn"
+      class="ai-clear"
       (click)="clear()"
       *ngIf="messages.length"
     >
@@ -36,27 +37,35 @@
     </div>
   </div>
 
-  <div class="ai-panel__prompts">
-    <button
-      type="button"
-      class="prompt-chip"
+  <mat-chip-set class="ai-panel__prompts" aria-label="Quick prompts">
+    <mat-chip
       *ngFor="let p of quickPrompts"
-      (click)="send(p)"
+      (click)="!thinking && send(p)"
       [disabled]="thinking"
     >
       {{ p }}
-    </button>
-  </div>
+    </mat-chip>
+  </mat-chip-set>
 
   <form class="ai-panel__input" (ngSubmit)="send()">
-    <input
-      type="text"
-      placeholder="Ask the assistant..."
-      [(ngModel)]="question"
-      name="question"
-      [disabled]="thinking"
-      aria-label="Ask the AI assistant"
-    />
-    <button type="submit" [disabled]="thinking || !question.trim()">Send</button>
+    <mat-form-field appearance="outline" class="ai-input-field" subscriptSizing="dynamic">
+      <input
+        matInput
+        type="text"
+        placeholder=" Ask the assistant..."
+        [(ngModel)]="question"
+        name="question"
+        [disabled]="thinking"
+        aria-label=" Ask the AI assistant"
+      />
+    </mat-form-field>
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      [disabled]="thinking || !question.trim()"
+    >
+      <mat-icon>send</mat-icon>
+    </button>
   </form>
-</div>
+</mat-card>

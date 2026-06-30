@@ -9,15 +9,7 @@
 }
 
 .back-link {
-  display: inline-block;
   margin-bottom: 1rem;
-  color: var(--accent);
-  text-decoration: none;
-  font-size: 0.9rem;
-
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 .detail__layout {
@@ -28,10 +20,7 @@
 }
 
 .detail__main {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 1.5rem;
+  overflow: hidden;
 }
 
 .detail__aside {
@@ -102,18 +91,23 @@
   }
 }
 
+mat-divider {
+  margin: 1.5rem 0;
+}
+
 .tags {
   display: flex;
   gap: 0.4rem;
   flex-wrap: wrap;
-}
 
-.tag {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  background: var(--surface-2);
-  padding: 0.2rem 0.55rem;
-  border-radius: 6px;
+  ::ng-deep .mat-mdc-chip {
+    --mdc-chip-container-height: 26px;
+    --mdc-chip-label-text-size: 0.76rem;
+    --mdc-chip-container-shape-radius: 999px;
+    background: var(--surface-2);
+    color: var(--text-muted);
+    font-weight: 500;
+  }
 }
 
 .comments {
@@ -164,8 +158,8 @@
 }
 
 .status-open {
-  background: #fef3c7;
-  color: #92400e;
+  background: #dbeafe;
+  color: #1e40af;
 }
 .status-in-progress {
   background: #dbeafe;
@@ -240,11 +234,18 @@
   }
   .detail__aside {
     position: static;
+    top: auto;
   }
 }
 
 @media (max-width: 600px) {
   .detail {
     padding: 1rem;
+  }
+  .detail__main {
+    padding: 1.1rem;
+  }
+  .detail__header h1 {
+    font-size: 1.3rem;
   }
 }
