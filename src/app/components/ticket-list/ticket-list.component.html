@@ -1,0 +1,68 @@
+<section class="dashboard">
+  <header class="dashboard__header">
+    <div>
+      <h1>Ticket Dashboard</h1>
+      <p class="subtitle">Track, search and resolve support tickets</p>
+    </div>
+    <div class="count-badge" *ngIf="!loading">
+      {{ tickets.length }} ticket{{ tickets.length === 1 ? '' : 's' }}
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <div class="search-box">
+      <span class="search-icon" aria-hidden="true">&#128269;</span>
+      <input
+        type="text"
+        placeholder="Search by title, requester, tag or #id..."
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="onFilterChange()"
+        aria-label="Search tickets"
+      />
+    </div>
+
+    <div class="status-filters" role="group" aria-label="Filter by status">
+      <button
+        *ngFor="let status of statuses"
+        type="button"
+        class="chip"
+        [class.chip--active]="selectedStatus === status"
+        (click)="selectedStatus = status; onFilterChange()"
+      >
+        {{ status }}
+      </button>
+    </div>
+
+    <button type="button" class="link-btn" (click)="clearFilters()">Reset</button>
+  </div>
+
+  <div class="loading" *ngIf="loading">
+    <div class="spinner"></div>
+    <span>Loading tickets...</span>
+  </div>
+
+  <div class="empty" *ngIf="!loading && tickets.length === 0">
+    <p>No tickets match your filters.</p>
+    <button type="button" class="link-btn" (click)="clearFilters()">Clear filters</button>
+  </div>
+
+  <ul class="ticket-grid" *ngIf="!loading && tickets.length > 0">
+    <li *ngFor="let ticket of tickets; trackBy: trackById">
+      <a class="ticket-card" [routerLink]="['/tickets', ticket.id]">
+        <div class="ticket-card__top">
+          <span class="ticket-id">#{{ ticket.id }}</span>
+          <span class="badge" [ngClass]="statusClass(ticket.status)">{{ ticket.status }}</span>
+        </div>
+        <h2 class="ticket-card__title">{{ ticket.title }}</h2>
+        <p class="ticket-card__desc">{{ ticket.description }}</p>
+        <div class="ticket-card__meta">
+          <span class="pill" [ngClass]="priorityClass(ticket.priority)">{{ ticket.priority }}</span>
+          <span class="assignee">{{ ticket.assignee }}</span>
+        </div>
+        <div class="ticket-card__tags">
+          <span class="tag" *ngFor="let tag of ticket.tags">#{{ tag }}</span>
+        </div>
+      </a>
+    </li>
+  </ul>
+</section>

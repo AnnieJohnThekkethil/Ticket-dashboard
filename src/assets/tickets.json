@@ -1,0 +1,179 @@
+[
+  {
+    "id": 1001,
+    "title": "Login page returns 500 error on submit",
+    "description": "Users report that submitting valid credentials on the login page intermittently returns a 500 Internal Server Error. The issue seems to spike during peak hours.",
+    "status": "Open",
+    "priority": "Critical",
+    "assignee": "Priya Sharma",
+    "requester": "Acme Corp",
+    "createdAt": "2026-06-21T09:14:00Z",
+    "updatedAt": "2026-06-28T11:02:00Z",
+    "tags": ["auth", "backend", "production"],
+    "comments": [
+      {
+        "author": "Acme Corp",
+        "message": "This is blocking our whole team from logging in.",
+        "timestamp": "2026-06-21T09:20:00Z"
+      },
+      {
+        "author": "Priya Sharma",
+        "message": "Investigating the auth service logs now.",
+        "timestamp": "2026-06-22T14:05:00Z"
+      }
+    ]
+  },
+  {
+    "id": 1002,
+    "title": "Dashboard charts not loading on Safari",
+    "description": "The analytics charts render correctly on Chrome and Firefox but appear blank on Safari 17. No console errors are visible.",
+    "status": "In Progress",
+    "priority": "High",
+    "assignee": "Liam Chen",
+    "requester": "Globex",
+    "createdAt": "2026-06-19T16:40:00Z",
+    "updatedAt": "2026-06-27T08:30:00Z",
+    "tags": ["frontend", "charts", "safari"],
+    "comments": [
+      {
+        "author": "Liam Chen",
+        "message": "Reproduced on Safari 17. Looks like a flexbox rendering bug.",
+        "timestamp": "2026-06-20T10:15:00Z"
+      }
+    ]
+  },
+  {
+    "id": 1003,
+    "title": "Export to CSV produces empty file",
+    "description": "When exporting the report to CSV with more than 10,000 rows, the downloaded file is empty. Smaller exports work fine.",
+    "status": "Open",
+    "priority": "Medium",
+    "assignee": "Unassigned",
+    "requester": "Initech",
+    "createdAt": "2026-06-25T12:00:00Z",
+    "updatedAt": "2026-06-25T12:00:00Z",
+    "tags": ["export", "performance"],
+    "comments": []
+  },
+  {
+    "id": 1004,
+    "title": "Add dark mode support",
+    "description": "Customers have requested a dark theme across the application for better accessibility and reduced eye strain.",
+    "status": "In Progress",
+    "priority": "Low",
+    "assignee": "Maya Patel",
+    "requester": "Hooli",
+    "createdAt": "2026-06-10T08:00:00Z",
+    "updatedAt": "2026-06-26T17:45:00Z",
+    "tags": ["feature", "ui", "accessibility"],
+    "comments": [
+      {
+        "author": "Maya Patel",
+        "message": "Design tokens are ready, implementing the theme switcher.",
+        "timestamp": "2026-06-24T09:30:00Z"
+      }
+    ]
+  },
+  {
+    "id": 1005,
+    "title": "Password reset email never arrives",
+    "description": "Several users report that the password reset email is not delivered. SPF and DKIM records appear correct.",
+    "status": "Resolved",
+    "priority": "High",
+    "assignee": "Priya Sharma",
+    "requester": "Umbrella Inc",
+    "createdAt": "2026-06-05T13:22:00Z",
+    "updatedAt": "2026-06-18T10:10:00Z",
+    "tags": ["email", "auth"],
+    "comments": [
+      {
+        "author": "Priya Sharma",
+        "message": "Root cause was a misconfigured email provider rate limit. Fixed.",
+        "timestamp": "2026-06-18T10:10:00Z"
+      }
+    ]
+  },
+  {
+    "id": 1006,
+    "title": "Mobile layout overlaps on small screens",
+    "description": "On devices narrower than 360px, the navigation bar overlaps the page title. Needs responsive adjustment.",
+    "status": "Open",
+    "priority": "Medium",
+    "assignee": "Liam Chen",
+    "requester": "Soylent",
+    "createdAt": "2026-06-27T07:50:00Z",
+    "updatedAt": "2026-06-28T09:00:00Z",
+    "tags": ["frontend", "responsive", "mobile"],
+    "comments": []
+  },
+  {
+    "id": 1007,
+    "title": "API rate limit too aggressive for enterprise plan",
+    "description": "Enterprise customers are hitting rate limits during batch operations. Requesting a higher threshold for this tier.",
+    "status": "In Progress",
+    "priority": "High",
+    "assignee": "Maya Patel",
+    "requester": "Stark Industries",
+    "createdAt": "2026-06-15T11:11:00Z",
+    "updatedAt": "2026-06-28T13:20:00Z",
+    "tags": ["api", "enterprise", "backend"],
+    "comments": [
+      {
+        "author": "Stark Industries",
+        "message": "This is impacting our nightly data sync.",
+        "timestamp": "2026-06-16T08:00:00Z"
+      }
+    ]
+  },
+  {
+    "id": 1008,
+    "title": "Typo in onboarding welcome email",
+    "description": "The onboarding welcome email says \"Welcom\" instead of \"Welcome\" in the subject line.",
+    "status": "Closed",
+    "priority": "Low",
+    "assignee": "Maya Patel",
+    "requester": "Wonka Industries",
+    "createdAt": "2026-06-01T10:00:00Z",
+    "updatedAt": "2026-06-03T15:30:00Z",
+    "tags": ["content", "email"],
+    "comments": [
+      {
+        "author": "Maya Patel",
+        "message": "Fixed and deployed.",
+        "timestamp": "2026-06-03T15:30:00Z"
+      }
+    ]
+  },
+  {
+    "id": 1009,
+    "title": "Two-factor authentication codes expiring too quickly",
+    "description": "TOTP codes are being rejected even when entered immediately. Suspect a server clock drift issue.",
+    "status": "Open",
+    "priority": "Critical",
+    "assignee": "Priya Sharma",
+    "requester": "Cyberdyne",
+    "createdAt": "2026-06-28T06:30:00Z",
+    "updatedAt": "2026-06-29T08:15:00Z",
+    "tags": ["auth", "security", "2fa"],
+    "comments": []
+  },
+  {
+    "id": 1010,
+    "title": "Search returns stale results after update",
+    "description": "After updating a record, the search index does not reflect the change for several minutes.",
+    "status": "Resolved",
+    "priority": "Medium",
+    "assignee": "Liam Chen",
+    "requester": "Pied Piper",
+    "createdAt": "2026-06-12T14:00:00Z",
+    "updatedAt": "2026-06-20T16:40:00Z",
+    "tags": ["search", "indexing"],
+    "comments": [
+      {
+        "author": "Liam Chen",
+        "message": "Reduced index refresh interval to 5 seconds.",
+        "timestamp": "2026-06-20T16:40:00Z"
+      }
+    ]
+  }
+]

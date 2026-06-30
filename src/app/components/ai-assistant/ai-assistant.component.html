@@ -1,0 +1,62 @@
+<div class="ai-panel">
+  <div class="ai-panel__header">
+    <div class="ai-title">
+      <span class="ai-avatar" aria-hidden="true">&#129302;</span>
+      <div>
+        <strong>AI Assistant</strong>
+        <small>Ask about ticket #{{ ticket.id }}</small>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="link-btn"
+      (click)="clear()"
+      *ngIf="messages.length"
+    >
+      Clear
+    </button>
+  </div>
+
+  <div class="ai-panel__messages">
+    <div class="ai-empty" *ngIf="!messages.length">
+      <p>Hi! I can help you understand and resolve this ticket. Try a quick prompt below.</p>
+    </div>
+
+    <div
+      *ngFor="let msg of messages"
+      class="bubble"
+      [class.bubble--user]="msg.role === 'user'"
+      [class.bubble--ai]="msg.role === 'assistant'"
+    >
+      <p>{{ msg.content }}</p>
+    </div>
+
+    <div class="bubble bubble--ai typing" *ngIf="thinking">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div class="ai-panel__prompts">
+    <button
+      type="button"
+      class="prompt-chip"
+      *ngFor="let p of quickPrompts"
+      (click)="send(p)"
+      [disabled]="thinking"
+    >
+      {{ p }}
+    </button>
+  </div>
+
+  <form class="ai-panel__input" (ngSubmit)="send()">
+    <input
+      type="text"
+      placeholder="Ask the assistant..."
+      [(ngModel)]="question"
+      name="question"
+      [disabled]="thinking"
+      aria-label="Ask the AI assistant"
+    />
+    <button type="submit" [disabled]="thinking || !question.trim()">Send</button>
+  </form>
+</div>
