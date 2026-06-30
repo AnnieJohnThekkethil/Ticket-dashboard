@@ -45,86 +45,77 @@
   gap: 1rem;
   flex-wrap: wrap;
   margin-bottom: 1.5rem;
-
-  button mat-icon {
-    margin-right: 0.25rem;
-  }
-}
-
-.toolbar__primary {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex: 1 1 280px;
-}
-
-.reset-btn {
-  flex: 0 0 auto;
-  white-space: nowrap;
 }
 
 .search-box {
-  flex: 1 1 auto;
-  min-width: 0;
-  max-width: 420px;
-  transition: flex-basis 0.3s ease, transform 0.2s ease;
+  position: relative;
+  flex: 1 1 280px;
 
-  ::ng-deep .mat-mdc-text-field-wrapper {
-    transition: box-shadow 0.25s ease;
-    background: var(--surface);
+  .search-icon {
+    position: absolute;
+    left: 0.85rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.6;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.7rem 0.9rem 0.7rem 2.4rem;
+    border: 1px solid var(--border);
     border-radius: 10px;
-  }
-
-  // The search input box itself
-  ::ng-deep input.mat-mdc-input-element {
+    background: var(--surface);
+    color: var(--text);
     font-size: 0.95rem;
-    color: var(--text-strong);
-    caret-color: var(--accent);
+    transition: border-color 0.15s, box-shadow 0.15s;
 
-    &::placeholder {
-      color: var(--text-muted);
-      opacity: 1;
-    }
-  }
-
-  ::ng-deep .mat-mdc-form-field-icon-prefix {
-    color: var(--text-muted);
-  }
-
-  // Light grey border for the search field
-  ::ng-deep .mdc-notched-outline__leading,
-  ::ng-deep .mdc-notched-outline__notch,
-  ::ng-deep .mdc-notched-outline__trailing {
-    border-color: var(--border) !important;
-  }
-
-  &:focus-within {
-    ::ng-deep .mat-mdc-text-field-wrapper {
+    &:focus {
+      outline: none;
+      border-color: var(--accent);
       box-shadow: 0 0 0 3px var(--accent-soft);
-      border-radius: 10px;
     }
-
-    ::ng-deep .mat-mdc-form-field-icon-prefix {
-      color: var(--accent);
-    }
-  }
-}
-
-// Only let the search box expand on wider screens
-@media (min-width: 768px) {
-  .search-box:focus-within {
-    flex-basis: 360px;
   }
 }
 
 .status-filters {
-  flex: 0 1 auto;
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
 
-  ::ng-deep .mdc-evolution-chip__action span {
+.chip {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  &--active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
     font-weight: 600;
-    font-size: 0.85rem;
-    letter-spacing: 0.01em;
-    color: inherit;
+  }
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.4rem;
+
+  &:hover {
+    text-decoration: underline;
   }
 }
 
@@ -133,31 +124,27 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1rem;
 }
 
-.ticket-card-link {
-  display: block;
+.ticket-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
   height: 100%;
+  padding: 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
   text-decoration: none;
   color: inherit;
-}
-
-.ticket-card {
-  height: 100%;
-  transition: transform 0.12s, box-shadow 0.12s;
+  transition: transform 0.12s, box-shadow 0.12s, border-color 0.12s;
 
   &:hover {
     transform: translateY(-2px);
+    border-color: var(--accent);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  }
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    height: 100%;
   }
 
   &__top {
@@ -195,21 +182,7 @@
   &__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.3rem;
-
-    ::ng-deep .mat-mdc-chip {
-      --mdc-chip-container-height: 24px;
-      --mdc-chip-label-text-size: 0.72rem;
-      --mdc-chip-container-shape-radius: 999px;
-      background: var(--surface-2);
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    ::ng-deep .mat-mdc-chip:hover {
-      background: var(--accent-soft);
-      color: var(--accent);
-    }
+    gap: 0.35rem;
   }
 }
 
@@ -249,8 +222,8 @@
 }
 
 .status-open {
-  background: #dbeafe;
-  color: #1e40af;
+  background: #fef3c7;
+  color: #92400e;
 }
 .status-in-progress {
   background: #dbeafe;
@@ -311,20 +284,8 @@
   .dashboard {
     padding: 1rem;
   }
-  .dashboard__header h1 {
-    font-size: 1.5rem;
-  }
   .toolbar {
     flex-direction: column;
     align-items: stretch;
-  }
-  .status-filters {
-    justify-content: flex-start;
-  }
-}
-
-@media (max-width: 360px) {
-  .ticket-grid {
-    grid-template-columns: 1fr;
   }
 }

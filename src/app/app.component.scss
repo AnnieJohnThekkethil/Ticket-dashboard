@@ -7,6 +7,9 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  padding: 0.85rem 1.5rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -17,12 +20,10 @@
   align-items: center;
   gap: 0.5rem;
   text-decoration: none;
-  color: inherit;
+  color: var(--text-strong);
 
-  mat-icon {
-    font-size: 1.5rem;
-    width: 1.5rem;
-    height: 1.5rem;
+  &__mark {
+    font-size: 1.4rem;
   }
 
   &__name {
@@ -33,10 +34,10 @@
 }
 
 .app-bar__tag {
+  color: var(--text-muted);
   font-size: 0.9rem;
   padding-left: 1rem;
-  border-left: 1px solid rgba(255, 255, 255, 0.4);
-  opacity: 0.9;
+  border-left: 1px solid var(--border);
 }
 
 .app-main {

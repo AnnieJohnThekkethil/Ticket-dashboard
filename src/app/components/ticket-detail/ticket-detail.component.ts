@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { switchMap } from 'rxjs/operators';
 
 import { Ticket, TicketStatus } from '../../models/ticket.model';
@@ -16,17 +10,7 @@ import { AiAssistantComponent } from '../ai-assistant/ai-assistant.component';
 @Component({
   selector: 'app-ticket-detail',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    AiAssistantComponent,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatChipsModule,
-    MatDividerModule,
-    MatProgressSpinnerModule,
-  ],
+  imports: [CommonModule, RouterLink, AiAssistantComponent],
   templateUrl: './ticket-detail.component.html',
   styleUrl: './ticket-detail.component.scss',
 })

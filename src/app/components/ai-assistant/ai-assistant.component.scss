@@ -8,13 +8,10 @@
   flex-direction: column;
   height: 100%;
   min-height: 420px;
+  border: 1px solid var(--border);
   border-radius: 14px;
+  background: var(--surface);
   overflow: hidden;
-  padding: 0;
-}
-
-::ng-deep .ai-panel.mat-mdc-card > .mat-mdc-card-content {
-  padding: 0;
 }
 
 .ai-panel__header {
@@ -46,10 +43,6 @@
 .ai-panel__header .link-btn {
   color: #fff;
   opacity: 0.9;
-}
-
-.ai-clear {
-  color: #fff;
 }
 
 .ai-panel__messages {
@@ -134,25 +127,24 @@
   flex-wrap: wrap;
   padding: 0.6rem 1rem;
   border-top: 1px solid var(--border);
+}
 
-  ::ng-deep .mat-mdc-chip {
-    --mdc-chip-container-height: 30px;
-    --mdc-chip-label-text-size: 0.78rem;
-    --mdc-chip-container-shape-radius: 999px;
-    cursor: pointer;
-    background: var(--surface-2);
-    color: var(--text-muted);
-    border: 1px solid var(--border);
-    transition: all 0.15s;
-  }
+.prompt-chip {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.15s;
 
-  ::ng-deep .mat-mdc-chip:not([disabled]):hover {
+  &:hover:not(:disabled) {
     border-color: var(--accent);
-    color: var(--accent);
-    background: var(--accent-soft);
+    color: var(--text);
   }
 
-  ::ng-deep .mat-mdc-chip[disabled] {
+  &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
@@ -160,46 +152,39 @@
 
 .ai-panel__input {
   display: flex;
-  align-items: center;
   gap: 0.5rem;
   padding: 0.8rem 1rem;
   border-top: 1px solid var(--border);
 
-  .ai-input-field {
+  input {
     flex: 1;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 0.9rem;
 
-    ::ng-deep .mat-mdc-text-field-wrapper {
-      background: var(--surface);
-      border-radius: 10px;
-    }
-
-    // The "Ask the assistant" input box itself
-    ::ng-deep input.mat-mdc-input-element {
-      font-size: 0.9rem;
-      color: var(--text-strong);
-      caret-color: var(--accent);
-
-      &::placeholder {
-        color: var(--text-muted);
-        opacity: 1;
-      }
-    }
-
-    // Light grey border
-    ::ng-deep .mdc-notched-outline__leading,
-    ::ng-deep .mdc-notched-outline__notch,
-    ::ng-deep .mdc-notched-outline__trailing {
-      border-color: var(--border) !important;
-    }
-
-    &:focus-within ::ng-deep .mat-mdc-text-field-wrapper {
+    &:focus {
+      outline: none;
+      border-color: var(--accent);
       box-shadow: 0 0 0 3px var(--accent-soft);
     }
   }
 
   button {
-    min-width: 0;
-    padding: 0 1rem;
+    border: none;
+    background: var(--accent);
+    color: #fff;
+    padding: 0 1.1rem;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 }
 

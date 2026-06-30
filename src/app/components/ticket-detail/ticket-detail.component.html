@@ -1,84 +1,76 @@
 <section class="detail">
-  <a mat-button color="primary" class="back-link" routerLink="/">
-    <mat-icon>arrow_back</mat-icon> Back to dashboard
-  </a>
+  <a class="back-link" routerLink="/">&larr; Back to dashboard</a>
 
   <div class="loading" *ngIf="loading">
-    <mat-progress-spinner mode="indeterminate" diameter="40"></mat-progress-spinner>
+    <div class="spinner"></div>
     <span>Loading ticket...</span>
   </div>
 
   <div class="not-found" *ngIf="!loading && notFound">
     <h2>Ticket not found</h2>
     <p>The ticket you are looking for does not exist.</p>
-    <a mat-flat-button color="primary" routerLink="/">Return to dashboard</a>
+    <a class="btn" routerLink="/">Return to dashboard</a>
   </div>
 
   <div class="detail__layout" *ngIf="!loading && ticket as t">
-    <mat-card class="detail__main" appearance="outlined">
-      <mat-card-content>
-        <header class="detail__header">
-          <span class="ticket-id">#{{ t.id }}</span>
-          <h1>{{ t.title }}</h1>
-          <div class="badges">
-            <span class="badge" [ngClass]="statusClass(t.status)">{{ t.status }}</span>
-            <span class="pill" [ngClass]="priorityClass(t.priority)">{{ t.priority }} priority</span>
-          </div>
-        </header>
+    <article class="detail__main">
+      <header class="detail__header">
+        <span class="ticket-id">#{{ t.id }}</span>
+        <h1>{{ t.title }}</h1>
+        <div class="badges">
+          <span class="badge" [ngClass]="statusClass(t.status)">{{ t.status }}</span>
+          <span class="pill" [ngClass]="priorityClass(t.priority)">{{ t.priority }} priority</span>
+        </div>
+      </header>
 
-        <dl class="meta-grid">
-          <div>
-            <dt>Requester</dt>
-            <dd>{{ t.requester }}</dd>
-          </div>
-          <div>
-            <dt>Assignee</dt>
-            <dd>{{ t.assignee }}</dd>
-          </div>
-          <div>
-            <dt>Created</dt>
-            <dd>{{ t.createdAt | date: 'medium' }}</dd>
-          </div>
-          <div>
-            <dt>Last updated</dt>
-            <dd>{{ t.updatedAt | date: 'medium' }}</dd>
-          </div>
-        </dl>
+      <dl class="meta-grid">
+        <div>
+          <dt>Requester</dt>
+          <dd>{{ t.requester }}</dd>
+        </div>
+        <div>
+          <dt>Assignee</dt>
+          <dd>{{ t.assignee }}</dd>
+        </div>
+        <div>
+          <dt>Created</dt>
+          <dd>{{ t.createdAt | date: 'medium' }}</dd>
+        </div>
+        <div>
+          <dt>Last updated</dt>
+          <dd>{{ t.updatedAt | date: 'medium' }}</dd>
+        </div>
+      </dl>
 
-        <section class="block">
-          <h3>Description</h3>
-          <p>{{ t.description }}</p>
-        </section>
+      <section class="block">
+        <h3>Description</h3>
+        <p>{{ t.description }}</p>
+      </section>
 
-        <mat-divider></mat-divider>
+      <section class="block">
+        <h3>Tags</h3>
+        <div class="tags">
+          <span class="tag" *ngFor="let tag of t.tags">#{{ tag }}</span>
+          <span class="muted" *ngIf="!t.tags.length">No tags</span>
+        </div>
+      </section>
 
-        <section class="block">
-          <h3>Tags</h3>
-          <mat-chip-set class="tags">
-            <mat-chip *ngFor="let tag of t.tags">#{{ tag }}</mat-chip>
-            <span class="muted" *ngIf="!t.tags.length">No tags</span>
-          </mat-chip-set>
-        </section>
-
-        <mat-divider></mat-divider>
-
-        <section class="block">
-          <h3>Activity ({{ t.comments.length }})</h3>
-          <ul class="comments" *ngIf="t.comments.length; else noComments">
-            <li *ngFor="let c of t.comments">
-              <div class="comment-head">
-                <strong>{{ c.author }}</strong>
-                <span class="muted">{{ c.timestamp | date: 'short' }}</span>
-              </div>
-              <p>{{ c.message }}</p>
-            </li>
-          </ul>
-          <ng-template #noComments>
-            <p class="muted">No activity yet.</p>
-          </ng-template>
-        </section>
-      </mat-card-content>
-    </mat-card>
+      <section class="block">
+        <h3>Activity ({{ t.comments.length }})</h3>
+        <ul class="comments" *ngIf="t.comments.length; else noComments">
+          <li *ngFor="let c of t.comments">
+            <div class="comment-head">
+              <strong>{{ c.author }}</strong>
+              <span class="muted">{{ c.timestamp | date: 'short' }}</span>
+            </div>
+            <p>{{ c.message }}</p>
+          </li>
+        </ul>
+        <ng-template #noComments>
+          <p class="muted">No activity yet.</p>
+        </ng-template>
+      </section>
+    </article>
 
     <aside class="detail__aside">
       <app-ai-assistant [ticket]="t"></app-ai-assistant>

@@ -10,72 +10,58 @@
   </header>
 
   <div class="toolbar">
-    <div class="toolbar__primary">
-      <mat-form-field appearance="outline" class="search-box" subscriptSizing="dynamic">
-        <!-- <mat-label>Search tickets</mat-label> -->
-        <mat-icon matPrefix>search</mat-icon>
-        <input
-          matInput
-          type="text"
-          placeholder="Title, requester, tag or #id..."
-          [(ngModel)]="searchTerm"
-          (ngModelChange)="onFilterChange()"
-        />
-      </mat-form-field>
+    <div class="search-box">
+      <span class="search-icon" aria-hidden="true">&#128269;</span>
+      <input
+        type="text"
+        placeholder="Search by title, requester, tag or #id..."
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="onFilterChange()"
+        aria-label="Search tickets"
+      />
+    </div>
 
-      <button mat-button color="primary" type="button" class="reset-btn" (click)="clearFilters()">
-        <mat-icon>refresh</mat-icon> Reset
+    <div class="status-filters" role="group" aria-label="Filter by status">
+      <button
+        *ngFor="let status of statuses"
+        type="button"
+        class="chip"
+        [class.chip--active]="selectedStatus === status"
+        (click)="selectedStatus = status; onFilterChange()"
+      >
+        {{ status }}
       </button>
     </div>
 
-    <mat-chip-listbox
-      class="status-filters"
-      aria-label="Filter by status"
-      [(ngModel)]="selectedStatus"
-      (ngModelChange)="onFilterChange()"
-    >
-      <mat-chip-option
-        *ngFor="let status of statuses"
-        [value]="status"
-        [selected]="selectedStatus === status"
-      >
-        {{ status }}
-      </mat-chip-option>
-    </mat-chip-listbox>
+    <button type="button" class="link-btn" (click)="clearFilters()">Reset</button>
   </div>
 
   <div class="loading" *ngIf="loading">
-    <mat-progress-spinner mode="indeterminate" diameter="40"></mat-progress-spinner>
+    <div class="spinner"></div>
     <span>Loading tickets...</span>
   </div>
 
   <div class="empty" *ngIf="!loading && tickets.length === 0">
     <p>No tickets match your filters.</p>
-    <button mat-stroked-button color="primary" type="button" (click)="clearFilters()">
-      Clear filters
-    </button>
+    <button type="button" class="link-btn" (click)="clearFilters()">Clear filters</button>
   </div>
 
   <ul class="ticket-grid" *ngIf="!loading && tickets.length > 0">
     <li *ngFor="let ticket of tickets; trackBy: trackById">
-      <a class="ticket-card-link" [routerLink]="['/tickets', ticket.id]">
-        <mat-card class="ticket-card" appearance="outlined">
-          <mat-card-content class="ticket-card__content">
-            <div class="ticket-card__top">
-              <span class="ticket-id">#{{ ticket.id }}</span>
-              <span class="badge" [ngClass]="statusClass(ticket.status)">{{ ticket.status }}</span>
-            </div>
-            <h2 class="ticket-card__title">{{ ticket.title }}</h2>
-            <p class="ticket-card__desc">{{ ticket.description }}</p>
-            <div class="ticket-card__meta">
-              <span class="pill" [ngClass]="priorityClass(ticket.priority)">{{ ticket.priority }}</span>
-              <span class="assignee">{{ ticket.assignee }}</span>
-            </div>
-            <mat-chip-set class="ticket-card__tags">
-              <mat-chip *ngFor="let tag of ticket.tags">#{{ tag }}</mat-chip>
-            </mat-chip-set>
-          </mat-card-content>
-        </mat-card>
+      <a class="ticket-card" [routerLink]="['/tickets', ticket.id]">
+        <div class="ticket-card__top">
+          <span class="ticket-id">#{{ ticket.id }}</span>
+          <span class="badge" [ngClass]="statusClass(ticket.status)">{{ ticket.status }}</span>
+        </div>
+        <h2 class="ticket-card__title">{{ ticket.title }}</h2>
+        <p class="ticket-card__desc">{{ ticket.description }}</p>
+        <div class="ticket-card__meta">
+          <span class="pill" [ngClass]="priorityClass(ticket.priority)">{{ ticket.priority }}</span>
+          <span class="assignee">{{ ticket.assignee }}</span>
+        </div>
+        <div class="ticket-card__tags">
+          <span class="tag" *ngFor="let tag of ticket.tags">#{{ tag }}</span>
+        </div>
       </a>
     </li>
   </ul>
